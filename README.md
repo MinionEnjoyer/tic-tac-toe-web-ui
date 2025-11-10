@@ -289,10 +289,10 @@ Edit component CSS files in `frontend/src/components/`
 ### Adjusting Game Logic
 Modify `backend/game_controller.py`
 
-## License
-
-MIT License - Feel free to modify and distribute!
-
 ## Credits
 
-Built for Raspberry Pi Zero 2 W hardware project with GPIO integration.
+A big thanks to my Dad, Mache Creeger, and to the Cascadia College Students and Teachers!
+
+## License
+
+This project is for educational purposes. Feel free to modify and improve!
