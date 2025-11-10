@@ -1,0 +1,27 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+}
+
+@media (max-width: 500px) {
+  .game-board {
+    max-width: 90vw;
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 350px) {
+  .game-board {
+    gap: 6px;
+    padding: 6px;
+  }
+}

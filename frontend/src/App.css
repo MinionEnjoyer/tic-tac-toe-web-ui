@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.App-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.connection-status {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.connection-status.connected {
+  background-color: rgba(76, 175, 80, 0.3);
+  color: #a8f5a8;
+}
+
+.connection-status.disconnected {
+  background-color: rgba(244, 67, 54, 0.3);
+  color: #ffcdd2;
+}
+
+.App-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.reset-button {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: white;
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reset-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+}
+
+.instructions {
+  margin-top: 2rem;
+  text-align: center;
+  color: white;
+  opacity: 0.9;
+}
+
+.instructions p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .App-header h1 {
+    font-size: 2rem;
+  }
+  
+  .reset-button {
+    padding: 0.625rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .instructions p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .App-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .App {
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,73 @@
+.turn-indicator {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicator-light {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.indicator-light.active {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.led-icon {
+  font-size: 1.5rem;
+}
+
+.player-x-light .led-icon {
+  color: #e74c3c;
+}
+
+.player-o-light .led-icon {
+  color: #3498db;
+}
+
+.indicator-light.active .led-icon {
+  animation: ledPulse 1s ease-in-out infinite;
+}
+
+.indicator-light span:last-child {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+@keyframes ledPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 500px) {
+  .turn-indicator {
+    gap: 1rem;
+  }
+  
+  .indicator-light {
+    padding: 0.5rem 1rem;
+  }
+  
+  .led-icon {
+    font-size: 1.25rem;
+  }
+  
+  .indicator-light span:last-child {
+    font-size: 0.9rem;
+  }
+}

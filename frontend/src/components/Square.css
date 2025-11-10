@@ -1,0 +1,81 @@
+.square {
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+}
+
+.square.filled {
+  animation: fillSquare 0.3s ease;
+}
+
+.square.winning {
+  animation: winPulse 1s ease-in-out infinite;
+  background-color: #ffd700;
+}
+
+.symbol {
+  animation: symbolAppear 0.3s ease;
+}
+
+.symbol.player-x {
+  color: #e74c3c;
+}
+
+.symbol.player-o {
+  color: #3498db;
+}
+
+@keyframes fillSquare {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes symbolAppear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes winPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.5);
+  }
+}
+
+@media (max-width: 500px) {
+  .square {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .square {
+    font-size: 2rem;
+  }
+}

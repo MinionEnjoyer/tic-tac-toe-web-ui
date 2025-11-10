@@ -1,0 +1,73 @@
+.game-status {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  animation: statusAppear 0.5s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-status.winner {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+}
+
+.game-status.draw {
+  background: rgba(155, 89, 182, 0.2);
+}
+
+.game-status h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.winner-text.player-x {
+  color: #e74c3c;
+  animation: winnerPulse 1s ease-in-out infinite;
+}
+
+.winner-text.player-o {
+  color: #3498db;
+  animation: winnerPulse 1s ease-in-out infinite;
+}
+
+.game-status p {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+@keyframes statusAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 500px) {
+  .game-status {
+    padding: 1rem;
+  }
+  
+  .game-status h2 {
+    font-size: 1.5rem;
+  }
+  
+  .game-status p {
+    font-size: 1rem;
+  }
+}
