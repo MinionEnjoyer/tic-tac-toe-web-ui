@@ -47,7 +47,9 @@ log "${GREEN}📡 Remote Version:  ${REMOTE_COMMIT}${NC}"
 if [ "$CURRENT_COMMIT" != "$REMOTE_COMMIT" ]; then
     log "${YELLOW}🔄 UPDATE AVAILABLE - Updating...${NC}"
     
-    # Pull latest changes
+    # Reset any local changes and pull latest
+    git reset --hard HEAD 2>&1 | tee -a "$LOG_FILE"
+    git clean -fd 2>&1 | tee -a "$LOG_FILE"
     git pull origin main 2>&1 | tee -a "$LOG_FILE"
     
     # Check if requirements.txt changed
