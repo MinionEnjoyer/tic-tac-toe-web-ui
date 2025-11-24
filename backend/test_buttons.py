@@ -15,9 +15,9 @@ BUTTON_PINS = {
     3: 23,  # Mid-Left
     4: 24,  # Mid-Center
     5: 25,  # Mid-Right
-    6: 12,  # Bottom-Left (changed from 5 - more reliable)
+    6: 19,  # Bottom-Left (changed from 12 - avoid PWM conflict)
     7: 6,   # Bottom-Center
-    8: 13,  # Bottom-Right
+    8: 26,  # Bottom-Right (changed from 13 - avoid PWM conflict)
 }
 
 def main():
@@ -35,7 +35,7 @@ def main():
     print("\nButton Layout:")
     print("  [0] [1] [2]    GPIO: [17] [27] [4]")
     print("  [3] [4] [5]    GPIO: [23] [24] [25]")
-    print("  [6] [7] [8]    GPIO: [12] [6]  [13]")
+    print("  [6] [7] [8]    GPIO: [19] [6]  [26]")
     print("\nPress Ctrl+C to exit\n")
     
     # Track previous states
