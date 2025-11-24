@@ -19,11 +19,11 @@ DEBUG = True
 BUTTON_PINS = {
     0: 17,  # Top-Left
     1: 27,  # Top-Center
-    2: 22,  # Top-Right
+    2: 4,   # Top-Right (changed from 22 - more reliable)
     3: 23,  # Mid-Left
     4: 24,  # Mid-Center
     5: 25,  # Mid-Right
-    6: 5,   # Bottom-Left
+    6: 12,  # Bottom-Left (changed from 5 - more reliable)
     7: 6,   # Bottom-Center
     8: 13,  # Bottom-Right
 }
