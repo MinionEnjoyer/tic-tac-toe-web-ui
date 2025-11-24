@@ -59,7 +59,7 @@ def on_button_press(position):
     
     if result is None:
         # Invalid move
-        socketio.emit('invalid_move', {'position': position}, broadcast=True)
+        socketio.emit('invalid_move', {'position': position})
         return
     
     # Update turn indicator LED
@@ -78,7 +78,7 @@ def on_button_press(position):
         gpio.set_turn_indicator(result['next_player'])
     
     # Broadcast move to all connected clients
-    socketio.emit('move_made', result, broadcast=True)
+    socketio.emit('move_made', result)
     
     # Auto-reset after game over
     if result['game_over']:
@@ -86,7 +86,7 @@ def on_button_press(position):
             time.sleep(3)  # Wait 3 seconds before reset
             game.reset_game()
             gpio.set_turn_indicator('X')
-            socketio.emit('game_reset', game.get_game_state(), broadcast=True)
+            socketio.emit('game_reset', game.get_game_state())
         Thread(target=reset_game, daemon=True).start()
 
 
@@ -144,7 +144,7 @@ def handle_reset():
     game.reset_game()
     if gpio:
         gpio.set_turn_indicator('X')
-    emit('game_reset', game.get_game_state(), broadcast=True)
+    emit('game_reset', game.get_game_state())
 
 
 @socketio.on('request_state')
