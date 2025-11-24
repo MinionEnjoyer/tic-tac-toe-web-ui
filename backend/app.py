@@ -25,7 +25,24 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Initialize game components
 game = GameController()
-gpio = None  # Will be initialized after first client connects
+
+# Initialize GPIO handler immediately (not waiting for client connection)
+gpio = None
+try:
+    print("Initializing GPIO handler...")
+    gpio = GPIOHandler(button_callback=lambda pos: on_button_press(pos))
+    gpio.set_turn_indicator('X')
+    print("GPIO handler initialized successfully!")
+except Exception as e:
+    print(f"Warning: Could not initialize GPIO: {e}")
+    print("GPIO buttons will not work, but web interface will still function")
+    # Create a dummy GPIO handler for testing
+    gpio = type('DummyGPIO', (), {
+        'set_turn_indicator': lambda self, p: print(f"LED: {p}"),
+        'flash_winner': lambda self, p: print(f"Flash: {p}"),
+        'turn_off_all_leds': lambda self: print("LEDs off"),
+        'cleanup': lambda self: None
+    })()
 
 
 def on_button_press(position):

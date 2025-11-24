@@ -29,14 +29,13 @@ class GPIOHandler:
         for position, pin in BUTTON_PINS.items():
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
             self.last_press_time[position] = 0
-            
-            # Add event detection for button press (falling edge = button press)
-            GPIO.add_event_detect(
-                pin,
-                GPIO.FALLING,
-                callback=self._button_callback,
-                bouncetime=int(BUTTON_DEBOUNCE * 1000)  # Convert to milliseconds
-            )
+        
+        # Start polling thread for button detection
+        self.button_states = {pos: GPIO.HIGH for pos in BUTTON_PINS.keys()}
+        self.running = True
+        import threading
+        self.poll_thread = threading.Thread(target=self._poll_buttons, daemon=True)
+        self.poll_thread.start()
         
         # Configure LED pins as outputs
         for player, pin in TURN_LED_PINS.items():
@@ -45,35 +44,30 @@ class GPIOHandler:
         
         print("GPIO handler initialized")
     
-    def _button_callback(self, channel):
-        """
-        Internal callback for GPIO event detection.
-        
-        Args:
-            channel: GPIO pin number that triggered the event
-        """
-        # Find which position this pin corresponds to
-        position = None
-        for pos, pin in BUTTON_PINS.items():
-            if pin == channel:
-                position = pos
-                break
-        
-        if position is None:
-            return
-        
-        # Check debounce time
-        current_time = time.time()
-        if current_time - self.last_press_time[position] < BUTTON_DEBOUNCE:
-            return
-        
-        self.last_press_time[position] = current_time
-        
-        print(f"Button pressed: Position {position}")
-        
-        # Call the user callback if set
-        if self.button_callback:
-            self.button_callback(position)
+    def _poll_buttons(self):
+        """Poll button states in a loop (replaces edge detection)."""
+        print("Button polling started")
+        while self.running:
+            for position, pin in BUTTON_PINS.items():
+                current_state = GPIO.input(pin)
+                
+                # Button pressed when state goes from HIGH to LOW (pull-up resistor)
+                if self.button_states[position] == GPIO.HIGH and current_state == GPIO.LOW:
+                    # Check debounce
+                    current_time = time.time()
+                    if current_time - self.last_press_time[position] >= BUTTON_DEBOUNCE:
+                        self.last_press_time[position] = current_time
+                        print(f"[DEBUG] Button pressed: Position {position} (GPIO {pin})")
+                        
+                        # Call the user callback
+                        if self.button_callback:
+                            self.button_callback(position)
+                
+                # Update state
+                self.button_states[position] = current_state
+            
+            # Small delay to avoid consuming too much CPU
+            time.sleep(0.01)  # Poll every 10ms
     
     def set_turn_indicator(self, player):
         """
