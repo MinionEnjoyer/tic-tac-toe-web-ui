@@ -34,6 +34,9 @@ TURN_LED_PINS = {
     'O': 20,  # Blue LED for Player O (GPIO20)
 }
 
+# WiFi Status LED Pin
+WIFI_LED_PIN = 21  # Green LED for WiFi connection status
+
 # Button Configuration
 # ====================
 

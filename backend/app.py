@@ -14,6 +14,7 @@ from threading import Thread
 from game_controller import GameController
 from gpio_handler import GPIOHandler
 from config import SERVER_HOST, SERVER_PORT, DEBUG
+import wifi_indicator
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='')
@@ -28,11 +29,17 @@ game = GameController()
 
 # Initialize GPIO handler immediately (not waiting for client connection)
 gpio = None
+wifi_led = None
 try:
     print("Initializing GPIO handler...")
     gpio = GPIOHandler(button_callback=lambda pos: on_button_press(pos))
     gpio.set_turn_indicator('X')
     print("GPIO handler initialized successfully!")
+    
+    # Initialize WiFi status indicator
+    print("Initializing WiFi status indicator...")
+    wifi_led = wifi_indicator.initialize()
+    print("WiFi status indicator started!")
 except Exception as e:
     print(f"Warning: Could not initialize GPIO: {e}")
     print("GPIO buttons will not work, but web interface will still function")
@@ -157,6 +164,7 @@ def cleanup():
     """Cleanup resources on shutdown."""
     if gpio:
         gpio.cleanup()
+    wifi_indicator.cleanup()
 
 
 if __name__ == '__main__':
